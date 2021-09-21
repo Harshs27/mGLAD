@@ -1,5 +1,6 @@
 import networkx as nx
 import numpy as np
+from sklearn import covariance
 import torch
 
 def convertToTorch(data, req_grad=False, use_cuda=False):
@@ -13,18 +14,38 @@ def convertToTorch(data, req_grad=False, use_cuda=False):
     return data
 
 
-def getCovariance(Xb):
+def eigVal_conditionNum(A):
+    """Calculates the eigenvalues and the condition 
+    number of the input matrix A
+
+    condition number = max(|eig|)/min(|eig|)
+    """
+    eig = [v.real for v in np.linalg.eigvals(A)]
+    condition_number = max(np.abs(eig)) / min(np.abs(eig))
+    return eig, condition_number
+
+
+def getCovariance(Xb, offset = 0.1):
     """Calculate the batch covariance matrix 
 
     Args:
-        Xb (torch.Tensor BxMxD): The input sample matrix
-
+        Xb (3D np array): The input sample matrices (B x M x D)
+        offset (float): The eigenvalue offset in case of bad 
+                        condition number
     Returns:
-        Sb (3D torch tensor (float)): Covariance (batch x dim x dim)
+        Sb (3D np array): Covariance matrices (B x D x D)
     """
-    B, M, D = Xb.shape
-    Sb = torch.bmm(Xb.transpose(1, 2), Xb)/M # BxDxD
-    return Sb
+    Sb = []
+    for X in Xb:
+        S = covariance.empirical_covariance(X, assume_centered=False)
+        # calculate the eigenvalue of the covariance S
+        eig, con = eigVal_conditionNum(S)
+        if min(eig)<=1e-3:
+            # adjust the eigenvalue
+            print(f'Adjust the eval: min {min(eig)}, con {con}')
+            S += np.eye(S.shape[-1]) * (offset-min(eig))
+        Sb.append(S)
+    return np.array(Sb)
 
 
 def generateRandomGraph(num_nodes, sparsity, seed=None):

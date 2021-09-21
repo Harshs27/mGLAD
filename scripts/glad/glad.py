@@ -3,7 +3,7 @@ from scripts.glad.torch_sqrtm import MatrixSquareRoot
 
 torch_sqrtm = MatrixSquareRoot.apply
 
-def get_optimizers(model_glad, lr_glad=0.05, use_optimizer='adam'):
+def get_optimizers(model_glad, lr_glad=0.03, use_optimizer='adam'):
     if use_optimizer == 'adam':
         optimizer_glad = torch.optim.Adam(
             model_glad.parameters(),
@@ -36,7 +36,7 @@ def get_frobenius_norm(A, single=False):
     return torch.mean(torch.sum(A**2, (1,2)))
 
 
-def glad(Sb, model, lambda_init=1, L=15, INIT_DIAG=1, USE_CUDA = False):
+def glad(Sb, model, lambda_init=1, L=15, INIT_DIAG=0, USE_CUDA = False):
     """Unrolling the Alternating Minimization algorithm which takes in the 
     sample covariance (batch mode), runs the iterations of the AM updates and 
     returns the precision matrix. The hyperparameters are modeled as small 

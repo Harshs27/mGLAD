@@ -39,11 +39,7 @@ def getGLADdata(num_nodes, sparsity, num_samples, batch_size=1):
         # collect the batch data
         Xb.append(X)
         trueTheta.append(true_theta)
-    # Converting the data to torch 
-    Xb = prepare_data.convertToTorch(np.array(Xb), req_grad=False)
-    trueTheta = prepare_data.convertToTorch(np.array(trueTheta),
-                req_grad=False)
-    return Xb, trueTheta
+    return np.array(Xb), np.array(trueTheta)
 
 
 def lossGLADmeta(theta, S):
