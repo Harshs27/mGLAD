@@ -60,5 +60,7 @@ def lossGLADmeta(theta, S):
     t21 = torch.einsum("bij, bjk -> bik", S, theta)
     # getting the trace (batch mode)
     t2 = torch.einsum('jii->j', t21) 
+    # regularization term 
+    # tr = 1e-02 * torch.sum(torch.abs(theta))
     meta_loss = torch.sum(t1+t2)/B # sum over the batch
-    return meta_loss
+    return meta_loss 

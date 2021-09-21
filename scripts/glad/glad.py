@@ -3,14 +3,14 @@ from scripts.glad.torch_sqrtm import MatrixSquareRoot
 
 torch_sqrtm = MatrixSquareRoot.apply
 
-def get_optimizers(model_glad, lr_glad=0.05, use_optimizer='adam'):
+def get_optimizers(model_glad, lr_glad=0.005, use_optimizer='adam'):
     if use_optimizer == 'adam':
         optimizer_glad = torch.optim.Adam(
             model_glad.parameters(),
             lr=lr_glad, 
             betas=(0.9, 0.999),
             eps=1e-08,
-            weight_decay=0.9
+            # weight_decay=0
         )
     else:
         print('Optimizer not found!')
