@@ -16,10 +16,11 @@ A minimalist working example of mGLAD. It is a good entry point to understand th
 If you find this method useful, kindly cite the following 2 associated papers:
 
 - mGLAD:  
+
+- GLAD:  
 @article{shrivastava2019glad,
   title={GLAD: Learning sparse graph recovery},
   author={Shrivastava, Harsh and Chen, Xinshi and Chen, Binghong and Lan, Guanghui and Aluru, Srinvas and Liu, Han and Song, Le},
   journal={arXiv preprint arXiv:1906.00271},
   year={2019}
 }
-- GLAD:  
