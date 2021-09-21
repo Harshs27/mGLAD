@@ -21,7 +21,7 @@ def getGLADdata(num_nodes, sparsity, num_samples, batch_size=1):
     
     Returns:
         Xb (torch.Tensor BxMxD): The sample data
-        trueTheta (torch.Tensor BxDxD): The true underlying precision matrices
+        trueTheta (torch.Tensor BxDxD): The true precision matrices
     """
     Xb, trueTheta = [], []
     for b in range(batch_size):
@@ -41,10 +41,8 @@ def getGLADdata(num_nodes, sparsity, num_samples, batch_size=1):
         trueTheta.append(true_theta)
     # Converting the data to torch 
     Xb = prepare_data.convertToTorch(np.array(Xb), req_grad=False)
-    trueTheta = prepare_data.convertToTorch(np.array(trueTheta), req_grad=False)
-
-    print(f'TrueTheta:\n {trueTheta, trueTheta.shape}')
-    print(f'Samples:\n {Xb, Xb.shape}')
+    trueTheta = prepare_data.convertToTorch(np.array(trueTheta),
+                req_grad=False)
     return Xb, trueTheta
 
 

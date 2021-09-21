@@ -93,10 +93,8 @@ def simulateGaussianSamples(
     smallest_eigval = smallest_eigval.real
     # making the min eigenvalue as u
     precision_mat = theta + np.eye(num_nodes)*(u - smallest_eigval)
-    print(f'Smallest eval = {np.min(np.linalg.eigvals(precision_mat))}')
-    # getting the covariance matrix
-    # avoiding the use of pinv as data not true 
-    # representative of conditional independencies.
+    # print(f'Smallest eval: {np.min(np.linalg.eigvals(precision_mat))}')
+    # getting the covariance matrix (avoid the use of pinv) 
     cov = np.linalg.inv(precision_mat) 
     # get the samples 
     if seed: np.random.seed(seed)
@@ -106,5 +104,4 @@ def simulateGaussianSamples(
         cov=cov, 
         size=num_samples
         )
-    # print(f'data: {data.shape} theta: {theta.shape}')
     return data, precision_mat  # MxD, DxD

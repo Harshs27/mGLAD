@@ -1,5 +1,5 @@
 ## mGLAD  
-A meta learning based approach to recover sparse graphs. This work proposes `mGLAD` which is a unsupervised version of a previous `GLAD` model (GLAD: Learning Sparse Graph Recovery (ICLR 2020 - [link]<https://openreview.net/forum?id=BkxpMTEtPB>).  
+A meta learning based approach to recover sparse graphs. This work proposes `mGLAD` which is a unsupervised version of a previous `GLAD` model (GLAD: Learning Sparse Graph Recovery (ICLR 2020 - [link](<https://openreview.net/forum?id=BkxpMTEtPB>)).  
 
 Key Benefits & features:  
 - It is a fast alternative to solving the Graphical Lasso problem as
