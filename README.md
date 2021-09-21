@@ -2,7 +2,9 @@
 A meta learning based approach to recover sparse graphs. This work proposes `mGLAD` which is a unsupervised version of a previous `GLAD` model (GLAD: Learning Sparse Graph Recovery (ICLR 2020 - [link]<https://openreview.net/forum?id=BkxpMTEtPB>).  
 
 Key Benefits & features:  
-- It is a fast alternative to solving the Graphical Lasso problem (GPU based acceleration can be leveraged).   
+- It is a fast alternative to solving the Graphical Lasso problem as
+    - GPU based acceleration can be leveraged
+    - Requires less number of iterations to converge due to neural network based acceleration of the unrolled algorithm (Alternating Minimization).     
 - mGLAD automatically learns the sparsity related regularization parameters. This gives an added benefit to mGLAD over other graphical lasso solvers.  
 - The meta loss is the logdet objective of the graphical lasso `1/B(-1*log|theta|+ <S, theta>)`, where `B=batch_size, S=input covariance matrix, theta=predicted precision matrix`.   
 
