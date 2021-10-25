@@ -3,7 +3,7 @@ from scripts.glad.torch_sqrtm import MatrixSquareRoot
 
 torch_sqrtm = MatrixSquareRoot.apply
 
-def get_optimizers(model_glad, lr_glad=0.005, use_optimizer='adam'):
+def get_optimizers(model_glad, lr_glad=0.002, use_optimizer='adam'):
     if use_optimizer == 'adam':
         optimizer_glad = torch.optim.Adam(
             model_glad.parameters(),
