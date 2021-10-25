@@ -9,7 +9,7 @@ class glad_params(torch.nn.Module):
         """Initializing the GLAD model
 
         Args:
-            theta_init_offset (float): The initial eigenvalue offset
+            theta_init_offset (float): The initial eigenvalue offset, set to a high value > 0.1
             nF (int): The number of input features for the entrywise thresholding
             H (int): The hidden layer size to be used for the NNs
             USE_CUDA (bool): Use GPU if True else CPU

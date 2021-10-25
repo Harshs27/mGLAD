@@ -45,7 +45,7 @@ def getGLADdata(num_nodes, sparsity, num_samples, batch_size=1):
 def lossGLADmeta(theta, S):
     """The objective function of the graphical lasso which is 
     the loss function for the meta learning of glad
-    loss-meta = 
+    loss-meta = 1/B(-log|theta| + <S, theta>)
 
     Args:
         theta (tensor 3D): precision matrix BxDxD
