@@ -16,8 +16,8 @@ import scripts.utils.prepare_data as prepare_data
 
 #################### Functions to generate data ####################
 def get_data(num_nodes, sparsity, num_samples, batch_size=1):
-    """Prepare true DAG adj matrices and then run a linear SEM 
-    simulation to get the corresponding samples.
+    """Prepare true adj matrices as theta and then sample from 
+    Gaussian to get the corresponding samples.
     
     Args:
         num_nodes (int): The number of nodes in DAG
