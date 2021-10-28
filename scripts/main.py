@@ -15,7 +15,15 @@ import scripts.utils.prepare_data as prepare_data
 
 
 #################### Functions to generate data ####################
-def get_data(num_nodes, sparsity, num_samples, batch_size=1):
+def get_data(
+    num_nodes,
+    sparsity,
+    num_samples,
+    batch_size=1,
+    typeG='RANDOM', 
+    w_min=0.5, 
+    w_max=1.0
+    ):
     """Prepare true adj matrices as theta and then sample from 
     Gaussian to get the corresponding samples.
     
@@ -24,6 +32,9 @@ def get_data(num_nodes, sparsity, num_samples, batch_size=1):
         num_edges (int): The number of desired edges in DAG
         num_samples (int): The number of samples to simulate from DAG
         batch_size (int, optional): The number of batches
+        typeG (str): RANDOM/GRID/CHAIN
+        w_min (float): Precision matrix entries ~Unif[w_min, w_max]
+        w_max (float):  Precision matrix entries ~Unif[w_min, w_max]
     
     Returns:
         Xb (torch.Tensor BxMxD): The sample data
@@ -34,13 +45,18 @@ def get_data(num_nodes, sparsity, num_samples, batch_size=1):
         # I - Getting the true edge connections
         edge_connections = prepare_data.generateRandomGraph(
             num_nodes, 
-            sparsity
+            sparsity,
+            typeG=typeG
             )
         # II - Gettings samples from fitting a Gaussian distribution
+        # sample the entry of the matrix 
+        
         X, true_theta = prepare_data.simulateGaussianSamples(
             num_nodes,
             edge_connections,
             num_samples, 
+            w_min=w_min,
+            w_max=w_max
             )
         # collect the batch data
         Xb.append(X)
